@@ -1,4 +1,11 @@
+import { useContext } from "react";
+import { Songs } from '../Context'
+
 function ListSongs() {
+    
+    const {DataSongs} = useContext(Songs)
+    console.log(DataSongs);
+
     return (
         <div className="col-span-2">
             <table className="table-auto w-full">
@@ -11,12 +18,21 @@ function ListSongs() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className="text-center">1</td>
-                        <td className="">1</td>
-                        <td className="text-center">1</td>
-                        <td className="text-center">1</td>
-                    </tr>
+                    {
+                        DataSongs.map((song, index) => (
+                            <tr key={index} className="bg-slate-800 h-12 text-gray-500 hover:bg-slate-400 hover:cursor-pointer">
+                                <td className="text-center">{index + 1}</td>
+                                <td >{song.name}</td>
+                                <td className="text-center">{song.author}</td>
+                                <td className="text-center">
+                                    <a href={song.url}>
+                                        <i className='fa fa-download'></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                    
                 </tbody>
             </table>
         </div>
